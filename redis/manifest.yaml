@@ -58,14 +58,14 @@ spec:
         - name: redis
           mountPath: /data
 ---
-# This is PVC
-volumeClaimTemplates:
-- metadata: 
-    name: redis
-  spec:
-    accessModes: [ "ReadWriteOnce" ]
-    storageClassName: "roboshop-ebs"
-    resources:
-      requests:
-        storage: 1Gi
+  # This is PVC
+  volumeClaimTemplates:
+  - metadata: 
+      name: redis
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "roboshop-ebs"
+      resources:
+        requests:
+          storage: 1Gi
 
