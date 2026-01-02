@@ -36,31 +36,31 @@ spec:
       - name: catalogue
         image: nareshungarala/catalogue:v1
         imagePullPolicy: Always
-      envFrom:
-      - configMapRef:
-        name: catalogue
-      ports:
-      - name: liveness-port
-        containerPort: 8080
-      resources:
-        requests:
-          cpu: "100m"
-          memory: "128Mi"
-        limts:
-          cpu: "100m"
-          memory: "128Mi"
-      readinessProbe:
-        httpGet:
+        envFrom:
+        - configMapRef:
+          name: catalogue
+        ports:
+        - name: liveness-port
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "100m"
+            memory: "128Mi"
+        readinessProbe:
+          httpGet:
+              path: /health
+              port: liveness-port
+          failureThreshold: 1
+          periodSeconds: 15
+        livenessProbe:
+          httpGet:
             path: /health
             port: liveness-port
-        failureThreshold: 1
-        periodSeconds: 15
-      livenessProbe:
-        httpGet:
-          path: /health
-          port: liveness-port
-        failureThreshold: 1
-        periodSeconds: 15
+          failureThreshold: 1
+          periodSeconds: 15
 
 ---
 apiVersion: v1
